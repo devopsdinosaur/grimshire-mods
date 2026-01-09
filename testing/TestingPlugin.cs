@@ -64,11 +64,43 @@ public class TestingPlugin : DDPlugin {
     class HarmonyPatch_1 {
         private static bool Prefix(PlayerController __instance) {
             __instance.hasUnlimitedStamina = true;
+			if (Input.GetKeyDown(KeyCode.LeftBracket)) {
+				GameManager.Instance.NotificationPanel?.DisplayNotification("Hi there!", 5);
+			}
             return true;
         }
     }
 
-    /*
+    [HarmonyPatch(typeof(GameManager), "Awake")]
+    class HarmonyPatch_GameManager_Awake {
+        private static void Postfix() {
+            try {
+                foreach (InventoryItem item in Resources.FindObjectsOfTypeAll<InventoryItem>()) {
+                    item.decayRate = 0f;
+                }
+            } catch (Exception e) {
+                _error_log("** HarmonyPatch_GameManager_Awake.Postfix ERROR - " + e);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(InventoryItem), "StackSize", MethodType.Getter)]
+	class HarmonyPatch_InventoryItem_StackSize {
+		private static bool Prefix(ref int __result) {
+			__result = 99999;
+			return false;
+		}
+	}
+
+	[HarmonyPatch(typeof(PlayerMovement), "Start")]
+	class HarmonyPatch_PlayerMovement_Start {
+		private static void Postfix(ref float ___originalMaxSpeed, ref float ___maxSpeed, ref float ___maxWalkSpeed, ref float ___maxRunSpeed) {
+			___originalMaxSpeed = ___maxWalkSpeed = ___maxSpeed *= 2f;
+			___maxRunSpeed = ___maxWalkSpeed * 1.5f;
+		}
+	}
+
+	/*
 	[HarmonyPatch(typeof(), "")]
 	class HarmonyPatch_ {
 		private static bool Prefix() {
