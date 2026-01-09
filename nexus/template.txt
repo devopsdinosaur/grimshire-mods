@@ -10,7 +10,7 @@ See the config options below for a complete list of features and how to use them
 [size=4][b][u]Installation[/u][/b][/size]
 
 [list=1]
-[*][url=https://www.nexusmods.com/hollowknightsilksong/mods/26]Install BepInEx[/url]
+[*][url=https://www.nexusmods.com/hollowknightsilksong/mods/1]Install BepInEx[/url]
 [*]Download and extract this mod.
 [*]Copy the extracted files to [i]<[[game]]-home>/BepInEx/plugins[/i] folder.
 [*]Start the game and exit.
@@ -42,8 +42,6 @@ All of my mods are open source on GitHub here: [url=https://github.com/[[author]
 Please let me know in the Posts section if you have problems or ideas for new mods/features.  Or, even better, you can submit issues directly on the GitHub page [url=https://github.com/[[author]]/[[repo]]/issues]here[/url]).
 
 [b]PSA[/b] - I don't do Kofi or anything anymore.  So if you like my mods then please consider donating to your time or money to a good cause.  My personal favorite is [url=https://wish.org]Make a Wish[/url].
-
-[url=https://ko-fi.com/devopsdinosaur/][img]https://i.ibb.co/5cYLp2z/kofi-donate-qrcode.png[/img][/url]
 
 Thanks a ton, and enjoy the mods!!
 dd

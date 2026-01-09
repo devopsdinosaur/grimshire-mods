@@ -11,12 +11,12 @@ using UnityEngine;
 
 public static class PluginInfo {
 
-    public const string TITLE = "Testing";
-    public const string NAME = "testing";
-    public const string SHORT_DESCRIPTION = "For testing only";
+    public const string TITLE = "Faster Tools";
+    public const string NAME = "faster_tools";
+    public const string SHORT_DESCRIPTION = "Greatly increases the speed of tool animations.";
 	public const string EXTRA_DETAILS = "";
 
-	public const string VERSION = "0.0.0";
+	public const string VERSION = "0.0.1";
 
     public const string AUTHOR = "devopsdinosaur";
     public const string GAME_TITLE = "Grimshire";
@@ -43,7 +43,6 @@ public class TestingPlugin : DDPlugin {
         try {
 			m_instance = this;
             this.m_plugin_info = PluginInfo.to_dict();
-            Settings.Instance.early_load(m_instance);
             m_instance.create_nexus_page();
             this.m_harmony.PatchAll();
             logger.LogInfo($"{PluginInfo.GUID} v{PluginInfo.VERSION} loaded.");
@@ -51,23 +50,6 @@ public class TestingPlugin : DDPlugin {
             _error_log("** Awake FATAL - " + e);
         }
     }
-
-    [HarmonyPatch(typeof(PlayerController), "Update")]
-    class HarmonyPatch_1 {
-        private static bool Prefix(PlayerController __instance) {
-            __instance.hasUnlimitedStamina = true;
-			
-            return true;
-        }
-    }
-
-	[HarmonyPatch(typeof(PlayerMovement), "Start")]
-	class HarmonyPatch_PlayerMovement_Start {
-		private static void Postfix(ref float ___originalMaxSpeed, ref float ___maxSpeed, ref float ___maxWalkSpeed, ref float ___maxRunSpeed) {
-			___originalMaxSpeed = ___maxWalkSpeed = ___maxSpeed *= 2f;
-			___maxRunSpeed = ___maxWalkSpeed * 1.5f;
-		}
-	}
 
     [HarmonyPatch(typeof(HoePlayerState), "UseHoe")]
     class HarmonyPatch_HoePlayerState_UseHoe {
@@ -77,45 +59,4 @@ public class TestingPlugin : DDPlugin {
             return false;
         }
     }
-
-    /*
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static bool Prefix() {
-			
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static void Postfix() {
-			
-		}
-	}
-
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static bool Prefix() {
-			try {
-
-				return false;
-			} catch (Exception e) {
-				_error_log("** XXXXX.Prefix ERROR - " + e);
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static void Postfix() {
-			try {
-				
-			} catch (Exception e) {
-				_error_log("** XXXXX.Postfix ERROR - " + e);
-			}
-		}
-	}
-	*/
 }
