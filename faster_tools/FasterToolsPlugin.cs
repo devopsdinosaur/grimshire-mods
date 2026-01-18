@@ -51,11 +51,41 @@ public class TestingPlugin : DDPlugin {
         }
     }
 
+    [HarmonyPatch(typeof(PlayerController), "UseAxe")]
+    class HarmonyPatch_AxePlayerState_UseAxe {
+        private static bool Prefix(PlayerController __instance, Vector3 pos, int chargeLevel, ref Vector2 ___axePosUsed, ref int ___axeChargeLevel) {
+            ___axePosUsed = pos;
+            ___axeChargeLevel = chargeLevel;
+            __instance.Invoke("DelayedAxe", 0f);
+            __instance.PlaySwingAxeSFX(0.1f);
+            return false;
+        }
+    }
+
     [HarmonyPatch(typeof(HoePlayerState), "UseHoe")]
     class HarmonyPatch_HoePlayerState_UseHoe {
         private static bool Prefix(PlayerController ___playerRef, Vector3 ___pos) {
             ___playerRef.GetAnim().speed = 3f;
 			ReflectionUtils.invoke_method(___playerRef, "UseHoe", new object[] { ___pos, 0f });
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(PlayerController), "UsePick")]
+    class HarmonyPatch_AxePlayerState_UsePick {
+        private static bool Prefix(PlayerController __instance, Vector3 pos, int chargeLevel, ref Vector2 ___pickPosUsed, ref int ___pickChargeLevel) {
+            ___pickPosUsed = pos;
+            ___pickChargeLevel = chargeLevel;
+            __instance.Invoke("DelayedPick", 0f);
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(ScythePlayerState), "UseScythe")]
+    class HarmonyPatch_ScythePlayerState_UseScythe {
+        private static bool Prefix(PlayerController ___playerRef, Vector3 ___pos) {
+            ___playerRef.GetAnim().speed = 3f;
+            ReflectionUtils.invoke_method(___playerRef, "UseScythe", new object[] { ___pos, 0f });
             return false;
         }
     }

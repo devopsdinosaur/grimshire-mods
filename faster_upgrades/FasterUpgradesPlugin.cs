@@ -12,12 +12,12 @@ using UnityEngine;
 
 public static class PluginInfo {
 
-    public const string TITLE = "Testing";
-    public const string NAME = "testing";
-    public const string SHORT_DESCRIPTION = "For testing only";
+    public const string TITLE = "Faster Upgrades";
+    public const string NAME = "faster_upgrades";
+    public const string SHORT_DESCRIPTION = "Reduce the number of days for tool upgrades, or make it instant!";
 	public const string EXTRA_DETAILS = "";
 
-	public const string VERSION = "0.0.0";
+	public const string VERSION = "0.0.1";
 
     public const string AUTHOR = "devopsdinosaur";
     public const string GAME_TITLE = "Grimshire";
@@ -53,76 +53,13 @@ public class TestingPlugin : DDPlugin {
         }
     }
 
-    [HarmonyPatch(typeof(PlayerController), "Update")]
-    class HarmonyPatch_1 {
-        private static bool Prefix(PlayerController __instance) {
-            __instance.hasUnlimitedStamina = true;
-            return true;
-        }
-    }
-
-	[HarmonyPatch(typeof(SmelterProcessor), "ProcTime", MethodType.Getter)]
-	class HarmonyPatch_SmelterProcessor_ProcTime_Getter {
-		private static bool Prefix(ref int __result) {
-			__result = 1;
-			return false;
-		}
-	}
-
-	[HarmonyPatch(typeof(SawProcesser), "ProcTime", MethodType.Getter)]
-	class HarmonyPatch_SawProcesser_ProcTime_Getter {
-		private static bool Prefix(ref int __result) {
-			__result = 1;
-			return false;
-		}
-	}
-
 	[HarmonyPatch(typeof(ToolWheel), "SetToolUpgrading")]
 	class HarmonyPatch_ToolWheel_SetToolUpgrading {
 		private static bool Prefix(ToolWheel __instance, string toolName, ref int numDays) {
-			numDays = 0;
-			return true;
-		}
-	}
-
-	/*
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static bool Prefix() {
-			
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static void Postfix() {
-			
-		}
-	}
-
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static bool Prefix() {
-			try {
-
-				return false;
-			} catch (Exception e) {
-				_error_log("** XXXXX.Prefix ERROR - " + e);
+			if (Settings.m_enabled.Value) {
+				numDays = Mathf.Max(0, Settings.m_upgrade_days.Value);
 			}
 			return true;
 		}
 	}
-
-	[HarmonyPatch(typeof(), "")]
-	class HarmonyPatch_ {
-		private static void Postfix() {
-			try {
-				
-			} catch (Exception e) {
-				_error_log("** XXXXX.Postfix ERROR - " + e);
-			}
-		}
-	}
-	*/
 }
