@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "movement_speed", "movement_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "faster_upgrades", "faster_upgrades\faster_upgrades.csproj", "{8ABE345B-2A11-4CA4-9215-96A3876191EF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "devmode", "devmode\devmode.csproj", "{AC327720-0AAF-4C09-AD5C-0F238BF6DCAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{8ABE345B-2A11-4CA4-9215-96A3876191EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ABE345B-2A11-4CA4-9215-96A3876191EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ABE345B-2A11-4CA4-9215-96A3876191EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC327720-0AAF-4C09-AD5C-0F238BF6DCAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC327720-0AAF-4C09-AD5C-0F238BF6DCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC327720-0AAF-4C09-AD5C-0F238BF6DCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC327720-0AAF-4C09-AD5C-0F238BF6DCAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
